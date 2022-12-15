@@ -1,5 +1,6 @@
 .container {
     height: calc(100vh - 120px);
+    overflow: hidden;
 }
 
 .arrowContainer {
@@ -7,8 +8,8 @@
     top: 0;
     bottom: 0;
     margin: auto;
-    height: 20%;
-    width: 20%;
+    height: 64px;
+    width: 64px;
     cursor: pointer;
     z-index: 9999;
 }
@@ -16,10 +17,17 @@
 .wrapper {
     width: 300vw;
     height: 100%;
+    display: flex;
+    transition: all 1.2s ease-in-out;
 }
 
 .imageContainer {
     width: 100vw;
     height: 100%;
     position: relative;
+
+}
+
+.arrows {
+    filter: drop-shadow(2px 4px 4px black);
 }
