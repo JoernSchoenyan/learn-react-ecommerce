@@ -10,7 +10,11 @@ export default function Home() {
         <meta name="description" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Slider/>
+      <Slider images={[
+        "/img/slider/pizzadesmonats.jpg",
+        "/img/slider/specialdesmonats.jpg",
+        "/img/slider/nachtischdesmonats.jpg",
+      ]} />
     </div>
   )
 }
