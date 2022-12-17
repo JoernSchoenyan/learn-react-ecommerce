@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Slider from '../components/Slider'
+import DishList from '../components/DishList'
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         "/img/slider/specialdesmonats.jpg",
         "/img/slider/nachtischdesmonats.jpg",
       ]} />
+      <DishList />
     </div>
   )
 }

@@ -11,7 +11,7 @@
     height: 64px;
     width: 64px;
     cursor: pointer;
-    z-index: 9999;
+    z-index: 100;
 }
 
 .wrapper {
