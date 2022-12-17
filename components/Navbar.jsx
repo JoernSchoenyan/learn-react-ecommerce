@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from "../styles/Navbar.module.css"
+import { ShoppingCart } from 'react-feather'
 
 const Navbar = ({config}) => {
   return (
@@ -28,7 +29,7 @@ const Navbar = ({config}) => {
       </div>
       <div className={styles.item}>
         <div className={styles.cart}>
-        🛒
+        <ShoppingCart size="48" />
         <div className={styles.counter}>
           2
         </div>
