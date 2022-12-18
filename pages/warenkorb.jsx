@@ -1,6 +1,7 @@
 import styles from '../styles/Cart.module.css'
 import React from 'react'
 import Image from 'next/image'
+import CartTotal from '../components/CartTotal'
 
 const Cart = () => {
   return (
@@ -45,22 +46,7 @@ const Cart = () => {
         </div>
 
         <div className={styles.right}>
-            <div className={styles.wrapper}>
-                <h2 className={styles.title}>GESAMTPREIS</h2>
-                <div className={styles.totalText}>
-                  <b className={styles.totalTextTitle}>Zwischensumme:</b>30€
-                </div>
-                <div className={styles.totalText}>
-                  <b className={styles.totalTextTitle}>Rabatt:</b>0€
-                </div>
-                <div className={styles.totalText}>
-                  <b className={styles.totalTextTitle}>Lieferkosten:</b>5€
-                </div>
-                <div className={styles.totalText}>
-                  <b className={styles.totalTextTitle}>Summe:</b>35€
-                </div>
-                <button className={styles.button}>KOSTENPFLICHTIG BESTELLEN</button>
-            </div>
+            <CartTotal />
         </div>
     </div>
   )
