@@ -6,11 +6,11 @@ const Footer = () => {
   return (
     <div className={styles.container}>
       <div className={styles.item}>
-        <Image src="/img/bg.jpg" alt="" fill />
+        <Image src="/img/bg.jpg" alt="" fill style={{objectFit: "cover"}} />
       </div>
       <div className={styles.item}>
         <div className={styles.card}>
-          PLACEHOLDER
+          <h3>PLACEHOLDER</h3>
         </div>
         <div className={styles.card}>
           <h3 className={styles.title}>UNSER RESTAURANT</h3>
