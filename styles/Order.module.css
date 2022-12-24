@@ -1,0 +1,94 @@
+.container {
+    padding: 50px;
+    display: flex;
+    gap: 50px;
+}
+
+.left {
+    flex: 2;
+}
+
+.table {
+    width: 100%;
+    border-spacing: 20px;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.total {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.right {
+    flex: 1;
+}
+
+.imageContainer {
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
+.orderDetails {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.row {
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row:last-child {
+    display: flex;
+    justify-content: space-around;
+}
+
+.done {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.inProgress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    animation: inProgress 2s ease infinite alternate;
+}
+
+@keyframes inProgress {
+    from {
+        opacity: 0.25;
+    }
+    to {
+        opacity: 0.75;
+    }
+}
+
+.notDone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.25;
+}
+
+.notDone .checkedIcon, .inProgress .checkedIcon {
+    display: none;
+}
