@@ -17,7 +17,9 @@ const CartTotal = ({checkoutButton}) => {
                 <div className={styles.totalText}>
                   <b className={styles.totalTextTitle}>Summe:</b>35€
                 </div>
-                {checkoutButton === true && <button className={styles.button}>KOSTENPFLICHTIG BESTELLEN</button>}
+                {checkoutButton 
+                  ? <button className={styles.button}>KOSTENPFLICHTIG BESTELLEN</button>
+                  : <button className={styles.button} disabled>BEZAHLT</button>}
             </div>
   )
 }
