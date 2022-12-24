@@ -1,7 +1,7 @@
 import styles from '../styles/CartTotal.module.css'
 import React from 'react'
 
-const CartTotal = () => {
+const CartTotal = ({checkoutButton}) => {
   return (
     <div className={styles.container}>
                 <h2 className={styles.title}>GESAMTPREIS</h2>
@@ -17,7 +17,7 @@ const CartTotal = () => {
                 <div className={styles.totalText}>
                   <b className={styles.totalTextTitle}>Summe:</b>35€
                 </div>
-                <button className={styles.button}>KOSTENPFLICHTIG BESTELLEN</button>
+                {checkoutButton === true && <button className={styles.button}>KOSTENPFLICHTIG BESTELLEN</button>}
             </div>
   )
 }

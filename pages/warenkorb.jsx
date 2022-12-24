@@ -46,7 +46,7 @@ const Cart = () => {
         </div>
 
         <div className={styles.right}>
-            <CartTotal />
+            <CartTotal checkoutButton />
         </div>
     </div>
   )
