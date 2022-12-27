@@ -1,14 +1,17 @@
 import styles from '../styles/DishCard.module.css'
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
-const DishCard = ({img}) => {
+const DishCard = ( {dish} ) => {
   return (
     <div className={styles.container}>
-        <Image src={img} alt="" width={250} height={200} />
-        <h1 className={styles.title}>Dönerpizza</h1>
-        <span className={styles.price}>10,50 €</span>
-        <p className={styles.desc}>Dicke Dönerpizza</p>
+        <Link href={`/produkte/${dish._id}`}>
+          <Image src="" alt="" width={250} height={200} />
+          <h1 className={styles.title}>{dish.title}</h1>
+          <span className={styles.price}>{dish.prices[0]} €</span>
+          <p className={styles.desc}>{dish.desc}</p>
+        </Link>
     </div>
   )
 }
