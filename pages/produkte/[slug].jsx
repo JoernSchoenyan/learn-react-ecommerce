@@ -10,12 +10,12 @@ const Product = ( {dish} ) => {
     <div className={styles.container}>
         <div className={styles.left}>
             <div className={styles.imageContainer}>
-                <Image src={dish.img} alt="" fill objectFit="contain"/>
+                <Image src={dish.img} alt="" fill style={{objectFit: "contain"}}/>
             </div>
         </div>
         <div className={styles.right}>
-            <h2 className={styles.title}>{dish.name}</h2>
-            <span className={styles.price}>{dish.price[size]} €</span>
+            <h2 className={styles.title}>{dish.title}</h2>
+            <span className={styles.price}>{dish.prices} €</span>
             <p className={styles.desc}>{dish.desc}</p>
 
             <h3 className={styles.choose}>Wählen Sie die Größe Ihrer Pizza</h3>
@@ -64,9 +64,8 @@ const Product = ( {dish} ) => {
 }
 
 export const getServerSideProps = async ( {params} ) => {
-    const res = await axios.get(`http://localhost:3000/api/products/${params}`);
-    console.log(res);
-  
+    const res = await axios.get(`http://localhost:3000/api/products/${params.slug}`);
+
     return {
       props: {
         dish: res.data

@@ -24,7 +24,6 @@ export default function Home( {dishList} ) {
 
 export const getServerSideProps = async () => {
   const res = await axios.get("http://localhost:3000/api/products");
-  console.log(res);
 
   return {
     props: {

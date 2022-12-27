@@ -1,8 +1,8 @@
 .container {
-    width: 22%;
+    width: 90%;
     padding: 20px 40px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -20,5 +20,5 @@
 }
 
 .desc {
-    text-align: center;
+    text-align: left;
 }

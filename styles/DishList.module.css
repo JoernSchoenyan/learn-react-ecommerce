@@ -3,15 +3,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 
 .desc {
     font-size: x-large;
     width: 70%;
+    max-width: 1360px;
 }
 
 .wrapper {
     width: 100%;
+    max-width: 1360px;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -15,6 +15,12 @@ const ProductSchema = new mongoose.Schema({
         type:[Number],
         required: true
     },
+    slug: {
+        type: String,
+        required: true,
+        maxLength: 60,
+        unique: true
+    },
     extraOptions: {
         type: [
             {
