@@ -3,8 +3,11 @@ import Image from 'next/image'
 import styles from "../styles/Navbar.module.css"
 import { ShoppingCart } from 'react-feather'
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
 
 const Navbar = ({config}) => {
+  const quantity = useSelector((state) => state.cart.quantity);
+
   return (
     <div className={styles.container}>
       <div className={styles.item}>
@@ -34,7 +37,7 @@ const Navbar = ({config}) => {
         <div className={styles.cart}>
         <ShoppingCart size="48" />
         <div className={styles.counter}>
-          2
+          {quantity}
         </div>
         </div>
       </div>
