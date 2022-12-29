@@ -2,12 +2,15 @@ import styles from "../../styles/Product.module.css"
 import React, { useState } from 'react'
 import Image from "next/image"
 import axios from "axios"
+import { useDispatch } from "react-redux"
+import { addProduct } from "../../redux/cartSlice"
 
 const Product = ( {dish} ) => {
   const [price, setPrice] = useState(dish.prices[0]);
   const [size, setSize] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [extras, setExtras] = useState([]);
+  const dispatch = useDispatch();
 
   const changePrice = (number) => {
     setPrice(price + number);
@@ -30,6 +33,10 @@ const Product = ( {dish} ) => {
         changePrice(-option.price);
         setExtras(extras.filter((extra) => extra._id !== option._id));
     }
+  }
+
+  const handleClick = () => {
+    dispatch(addProduct({...dish, extras, price, quantity}))
   }
 
   const selectedSizeClass = (index) => {
@@ -95,7 +102,10 @@ const Product = ( {dish} ) => {
                     min="1"
                     onChange={(e) => setQuantity(e.target.value)}
                 />
-                <button className={styles.button}>Zum Warenkorb hinzufügen</button>
+                <button 
+                    className={styles.button}
+                    onClick={handleClick}>Zum Warenkorb hinzufügen
+                </button>
             </div>
         </div>
     </div>

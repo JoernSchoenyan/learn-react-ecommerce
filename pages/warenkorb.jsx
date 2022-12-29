@@ -2,8 +2,12 @@ import styles from '../styles/Cart.module.css'
 import React from 'react'
 import Image from 'next/image'
 import CartTotal from '../components/CartTotal'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Cart = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+
   return (
     <div className={styles.container}>
         <div className={styles.left}>
@@ -19,34 +23,42 @@ const Cart = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <div className={styles.imageContainer}>
-                        <Image src="/img/logo.svg" alt="" fill objectFit="cover" />
-                      </div>
-                    </td>
-                    <td>
-                      <span className={styles.name}>Dönerpizza</span>
-                    </td>
-                    <td>
-                      <span className={styles.extras}>Scharf</span>
-                    </td>
-                    <td style={{textAlign: "center"}}>
-                      <span className={styles.price}>15 €</span>
-                    </td>
-                    <td style={{textAlign: "center"}}>
-                      <span className={styles.quantity}>2</span>
-                    </td>
-                    <td style={{textAlign: "right"}}>
-                      <span className={styles.total}>30 €</span>
-                    </td>
-                  </tr>
+                  {cart.products.map(product => (
+                    <tr key={product._id}>
+                      <td>
+                        <div className={styles.imageContainer}>
+                          <Image src="/img/logo.svg" alt="" fill style={{objectFit: "cover"}} />
+                        </div>
+                      </td>
+                      <td>
+                        <span className={styles.name}>{product.title}</span>
+                      </td>
+                      <td>
+                        <span className={styles.extras}>
+                          {
+                            product.extras.map((extra) => (
+                              <span key={extra._id}>{extra.text}</span>
+                            ))
+                          }
+                        </span>
+                      </td>
+                      <td style={{textAlign: "center"}}>
+                        <span className={styles.price}>{product.price} €</span>
+                      </td>
+                      <td style={{textAlign: "center"}}>
+                        <span className={styles.quantity}>{product.quantity}</span>
+                      </td>
+                      <td style={{textAlign: "right"}}>
+                        <span className={styles.total}>{product.price * product.quantity} €</span>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
             </table>
         </div>
 
         <div className={styles.right}>
-            <CartTotal checkoutButton />
+            <CartTotal checkoutButton total={cart.total} />
         </div>
     </div>
   )

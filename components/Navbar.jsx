@@ -33,13 +33,15 @@ const Navbar = ({config}) => {
           <li className={styles.listItem}>Kontakt</li>
         </ul>
       </div>
-      <div className={styles.item}>
-        <div className={styles.cart}>
-        <ShoppingCart size="48" />
-        <div className={styles.counter}>
-          {quantity}
-        </div>
-        </div>
+      <div className={styles.item} passHref>
+        <Link href={"/warenkorb"}>
+          <div className={styles.cart}>
+            <ShoppingCart size="48" />
+            <div className={styles.counter}>
+              {quantity}
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   )
