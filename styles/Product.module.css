@@ -41,23 +41,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 10px;
 }
 
-.size:nth-child(2) {
-
-}
-
-.size:last-child {
-
+.selectedSize {
+    border: 3px solid green;
+    border-radius: 10px;
 }
 
 .sizes {
    
     display: flex;
     justify-content: space-between;
-}
-
-.number {
 }
 
 .sizeImage {

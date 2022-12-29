@@ -32,6 +32,15 @@ const Product = ( {dish} ) => {
     }
   }
 
+  const selectedSizeClass = (index) => {
+    if (index === size) {
+        return [styles.size, styles.selectedSize].join(" ");
+    }
+    else {
+        return styles.size;
+    }
+  }
+
   return (
     <div className={styles.container}>
         <div className={styles.left}>
@@ -44,17 +53,17 @@ const Product = ( {dish} ) => {
             <span className={styles.price}>{price} €</span>
             <p className={styles.desc}>{dish.desc}</p>
 
-            <h3 className={styles.choose}>Wählen Sie die Größe Ihrer Pizza</h3>
+            <h3 className={styles.choose}>Wählen Sie die Größe Ihrer Pizza:</h3>
             <div className={styles.sizes}>
-                <div className={styles.size} onClick={() => handleSize(0)}>
+                <div className={selectedSizeClass(0)} onClick={() => handleSize(0)}>
                     <Image className={styles.sizeImage} src="/img/logo.svg" alt="" width={50} height={50} />
                     <span className={styles.number}>Klein (⌀ etwa 24cm)</span>
                 </div>
-                <div className={styles.size} onClick={() => handleSize(1)}>
+                <div className={selectedSizeClass(1)} onClick={() => handleSize(1)}>
                     <Image className={styles.sizeImage} src="/img/logo.svg" alt="" width={50} height={50} />
                     <span className={styles.number}>Mittel (⌀ etwa 28cm)</span>
                 </div>
-                <div className={styles.size} onClick={() => handleSize(2)}>
+                <div className={selectedSizeClass(2)} onClick={() => handleSize(2)}>
                     <Image className={styles.sizeImage} src="/img/logo.svg" alt="" width={50} height={50} />
                     <span className={styles.number}>Groß (⌀ etwa 40cm)</span>
                 </div>
