@@ -27,10 +27,10 @@ const Navbar = ({config}) => {
       </div>
       <div className={styles.item}>
         <ul className={styles.list}>
-          <li className={styles.listItem}>Home</li>
+          <li className={styles.listItem}><Link href={"/"}>Home</Link></li>
           <li className={styles.listItem}>Essen bestellen</li>
           <li className={styles.listItem}>Tisch reservieren</li>
-          <li className={styles.listItem}>Kontakt</li>
+          <li className={styles.listItem}><Link href={"/kontaktformular"}>Kontakt</Link></li>
         </ul>
       </div>
       <div className={styles.item} passHref>
