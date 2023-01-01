@@ -1,12 +1,11 @@
 .container {
-    width: 90%;
-    max-height: 300px;
     background-color:dimgrey;
     color: white;
     padding: 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-bottom: 30px;
 }
 
 .button {
