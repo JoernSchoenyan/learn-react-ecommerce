@@ -1,11 +1,11 @@
 import styles from '../../styles/Order.module.css'
 import React from 'react'
 import Image from 'next/image'
-import CartTotal from '../../components/CartTotal'
 import { File, CheckSquare, Map, Truck, Coffee } from 'react-feather'
+import axios from 'axios'
 
-const Order = () => {
-  const status = 0;
+const Order = ( {order} ) => {
+  const status = order.status;
     
   const statusClass = (index) => {
     if (index - status < 1 ) return styles.done
@@ -16,7 +16,7 @@ const Order = () => {
   return (
     <div className={styles.container}>
         <div className={styles.left}>
-          <span>Bestellung #523624572546</span>
+          <span>Bestellung #{order._id}</span>
           <div className={styles.row}>
 
             <div className={statusClass(0)}>
@@ -88,14 +88,21 @@ const Order = () => {
         </div>
         <div className={styles.right}>
             <div className={styles.orderDetails}>
-              <span>Helga Hoppenstedt</span>
-              <span>Musterstraße 123a</span>
-              <span>38350 Helmstedt</span>
+              <span>{order.customer}</span>
+              <span>{order.address}</span>
+              <span>{order.total}</span>
             </div>
-            <CartTotal />
         </div>
     </div>
   )
+}
+
+export const getServerSideProps = async ({ params }) => {
+  const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`);
+
+  return {
+    props: { order: res.data }
+  }
 }
 
 export default Order

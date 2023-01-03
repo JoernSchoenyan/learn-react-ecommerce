@@ -1,7 +1,6 @@
 import styles from '../styles/Cart.module.css'
 import React from 'react'
 import Image from 'next/image'
-import CartTotal from '../components/CartTotal'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from "react";
 import {
@@ -9,15 +8,31 @@ import {
     PayPalButtons,
     usePayPalScriptReducer
 } from "@paypal/react-paypal-js";
+import { useRouter } from 'next/router';
+import { reset } from "../redux/cartSlice"
+import axios from 'axios';
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const router = useRouter();
   const [showPayPal, setShowPayPal] = useState(true);
 
-  const amount = "2";
+  const amount = cart.total;
   const currency = "EUR";
-  const style = {"layout": "vertical"};
+  const style = {"label": "pay"};
+  const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+
+  const createOrder = async (data) => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/orders", data);
+      res.status === 201 && router.push("/bestellung/" + res.data._id);
+      dispatch(reset())
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
 
   // https://paypal.github.io/react-paypal-js/?path=/docs/example-paypalbuttons--default
   // Custom component to wrap the PayPalButtons and handle currency changes
@@ -62,8 +77,15 @@ const Cart = () => {
                         });
                 }}
                 onApprove={function (data, actions) {
-                    return actions.order.capture().then(function () {
-                        // Your code here after capture the order
+                    return actions.order.capture().then(function (details) {
+                        const shipping = details.purchase_units[0].shipping;
+
+                        createOrder({
+                          customer: shipping.name.full_name,
+                          address: shipping.address.address_line_1,
+                          total: cart.total,
+                          method: 1
+                        });
                     });
                 }}
             />
@@ -135,19 +157,21 @@ const Cart = () => {
                 <div className={styles.totalText}>
                   <b className={styles.totalTextTitle}>Summe:</b>{cart.total} €
                 </div>
-                <button className={styles.button}>KOSTENPFLICHTIG BESTELLEN UND BAR BEZAHLEN</button>
-                {showPayPal ? (<PayPalScriptProvider
-                    options={{
-                        "client-id": "test",
-                        components: "buttons",
-                        currency: "EUR"
-                    }}
-                >
-                <ButtonWrapper
-                        currency={currency}
-                        showSpinner={false}
-                    />
-                </PayPalScriptProvider>) : (<></>)}
+                <div className={styles.paymentMethods}>
+                  <button className={styles.payCashButton}>KOSTENPFLICHTIG BESTELLEN UND BAR BEZAHLEN</button>
+                  {showPayPal ? (<PayPalScriptProvider
+                      options={{
+                          "client-id": PAYPAL_CLIENT_ID,
+                          components: "buttons",
+                          currency: "EUR"
+                      }}
+                  >
+                  <ButtonWrapper
+                          currency={currency}
+                          showSpinner={false}
+                      />
+                  </PayPalScriptProvider>) : (<></>)}
+                </div>
             </div>
             
             
