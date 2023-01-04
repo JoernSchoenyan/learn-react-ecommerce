@@ -1,11 +1,12 @@
 import styles from "../../styles/Product.module.css"
 import React, { useState } from 'react'
 import Image from "next/image"
-import axios from "axios"
 import { useDispatch } from "react-redux"
 import { addProduct } from "../../redux/cartSlice"
+import dbConnect from "../../util/mongo"
+import Product from "../../models/Product"
 
-const Product = ( {dish} ) => {
+const ProductPage = ( {dish} ) => {
   const [price, setPrice] = useState(dish.prices[0]);
   const [size, setSize] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -89,8 +90,7 @@ const Product = ( {dish} ) => {
                         />
                         <label htmlFor={option.text}>{option.text}</label>
                     </div>
-                ))}
-                
+                ))}  
                 
             </div>
 
@@ -113,13 +113,16 @@ const Product = ( {dish} ) => {
 }
 
 export const getServerSideProps = async ( {params} ) => {
-    const res = await axios.get(`http://localhost:3000/api/products/${params.slug}`);
+    await dbConnect();
+
+    const product = await Product.findOne({slug: params.slug}).lean();
+    product._id
 
     return {
       props: {
-        dish: res.data
+        dish: JSON.parse(JSON.stringify(product))
       }
     }
   }
 
-export default Product
+export default ProductPage
