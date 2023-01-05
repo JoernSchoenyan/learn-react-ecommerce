@@ -2,9 +2,10 @@ import styles from '../../styles/Order.module.css'
 import React from 'react'
 import Image from 'next/image'
 import { File, CheckSquare, Map, Truck, Coffee } from 'react-feather'
-import axios from 'axios'
+import Order from '../../models/Order'
+import dbConnect from '../../util/mongo'
 
-const Order = ( {order} ) => {
+const OrderPage = ( {order} ) => {
   const status = order.status;
     
   const statusClass = (index) => {
@@ -98,11 +99,28 @@ const Order = ( {order} ) => {
 }
 
 export const getServerSideProps = async ({ params }) => {
-  const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`);
+  await dbConnect();
+
+  const order = await Order.findById(params.id).lean();
 
   return {
-    props: { order: res.data }
+    props: { 
+      order: JSON.parse(JSON.stringify(order))
+    }
   }
 }
 
-export default Order
+// export const getServerSideProps = async ( {params} ) => {
+//   await dbConnect();
+
+//   const product = await Product.findOne({slug: params.slug}).lean();
+//   product._id
+
+//   return {
+//     props: {
+//       dish: JSON.parse(JSON.stringify(product))
+//     }
+//   }
+// }
+
+export default OrderPage
