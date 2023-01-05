@@ -2,7 +2,8 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Slider from '../components/Slider'
 import DishList from '../components/DishList'
-import axios from "axios";
+import dbConnect from '../util/mongo'
+import Product from '../models/Product'
 
 export default function Home( {dishList} ) {
   return (
@@ -23,11 +24,13 @@ export default function Home( {dishList} ) {
 }
 
 export const getServerSideProps = async () => {
-  const res = await axios.get("http://localhost:3000/api/products");
+  await dbConnect();
+
+  const products = await Product.find().lean();
 
   return {
     props: {
-      dishList: res.data
+      dishList: JSON.parse(JSON.stringify(products))
     }
   }
 }
