@@ -110,17 +110,4 @@ export const getServerSideProps = async ({ params }) => {
   }
 }
 
-// export const getServerSideProps = async ( {params} ) => {
-//   await dbConnect();
-
-//   const product = await Product.findOne({slug: params.slug}).lean();
-//   product._id
-
-//   return {
-//     props: {
-//       dish: JSON.parse(JSON.stringify(product))
-//     }
-//   }
-// }
-
 export default OrderPage
